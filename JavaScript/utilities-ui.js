@@ -27,9 +27,15 @@ export const createBtn = (text) => {
   return contentBtn;
 };
 
-const hiddenOpen = (clas) => {
-  const hidden = document.getElementById(clas);
+// const hiddenOpen = (clas) => {
+//   const hidden = document.getElementById(clas);
 
-  if (hidden.classList.add("hidden")) {
-  }
+//   if (hidden.classList.add("hidden")) {
+//   }
+// };
+
+export const generateId = (id) => {
+  const idAleatorio = Math.random().toString(8).substring(2, 6);
+
+  return idAleatorio;
 };

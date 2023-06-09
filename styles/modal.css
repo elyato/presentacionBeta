@@ -5,4 +5,44 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+display: flex;
+}
+
+.content-modal {
+  display: flex;
+  width: 40.1rem;
+  height: 25.2rem;
+  justify-content: center;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 1rem;
+  padding: 3.2rem 3.6rem 3.2rem 3.6rem;
+  justify-content: space-around;
+}
+.title-modal {
+  font-size: 1.9rem;
+}
+
+.conten-btn {
+  display: flex;
+}
+
+.txtModal {
+  font-size: 1.4rem;
+  padding-right: 4rem;
+}
+
+.btn-yes-delete button {
+  background-color: red;
+  font-size: 1.4rem;
+  /* width: 6rem; */
+}
+
+.btn-no-delete button {
+  background-color: grey;
+  font-size: 1.4rem;
 }

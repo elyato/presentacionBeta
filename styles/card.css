@@ -7,18 +7,6 @@
   width: 63rem;
 }
 
-/* .container-card {
- 
-}
-.container-card .content-title-card {
-  width: 54rem;
-}
-.container-card .content-card {
-  width: 64rem;
-}
-.container-card .content-card .written {
-  width: 43rem;
-} */
 .reply-container {
   margin-left: 3rem;
   border-left: solid 1px rgba(160, 160, 160, 0.699);
@@ -88,6 +76,9 @@ aside {
   align-items: center;
   gap: 1.6rem;
   margin-right: 2rem;
+}
+.content-user p{
+  font-size: 1.4rem;
 }
 .text-title-comment {
   font-weight: 400;
@@ -184,11 +175,15 @@ button {
   background-color: white;
 }
 
-/* 
-.commentary-reply */
+
 .content-textarea {
   width: 100%;
 }
 .content-textarea textarea {
   width: 100%;
+}
+
+
+.prueba{
+color: blue;
 }

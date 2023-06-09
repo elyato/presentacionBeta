@@ -1,7 +1,9 @@
-import { createElement } from "../utilities-ui.js";
+import { createElement, generateId } from "../utilities-ui.js";
 import icons from "./svg.js";
 import estado from "./estados.js";
 export const createVotes = (id, score) => {
+  const contentLikes = createElement("aside");
+
   const contentButton = createElement("div", "button-likes");
 
   const iconMinus = createElement("button", "icon-plus");
@@ -41,10 +43,10 @@ export const createVotes = (id, score) => {
     const nuevoEstado = reduce(scoreActual, estado.negativo);
     incrementVotes(nuevoEstado, id);
   };
-
   contentButton.append(iconPLus);
+  contentLikes.append(contentButton);
 
-  return contentButton;
+  return contentLikes;
 };
 
 const incrementVotes = (votos, id) => {
