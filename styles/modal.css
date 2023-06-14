@@ -9,7 +9,7 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
-display: flex;
+  display: flex;
 }
 
 .content-modal {
@@ -29,20 +29,22 @@ display: flex;
 
 .conten-btn {
   display: flex;
+  justify-content: space-between;
 }
 
 .txtModal {
   font-size: 1.4rem;
   padding-right: 4rem;
-}
-
-.btn-yes-delete button {
-  background-color: red;
-  font-size: 1.4rem;
-  /* width: 6rem; */
+  color: gray;
 }
 
 .btn-no-delete button {
   background-color: grey;
   font-size: 1.4rem;
+  width: 15rem;
+}
+
+.btn-yes-delete button {
+  background-color: var(--Soft-Red);
+  width: 15rem;
 }
