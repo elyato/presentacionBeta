@@ -8,6 +8,8 @@ import {
 } from "../utilities-ui.js";
 import createTextareaComment from "./contentCommentary.js";
 import action from "../data/acciones.js";
+import local from "../module/localStorage.js";
+
 export const sectionAddComentary = (
   image,
   username,
@@ -33,22 +35,19 @@ export const sectionAddComentary = (
   const validation = buttonReply.btn;
   validation.disabled = true;
 
-  let arrobaUsername = "";
+  let texto = "";
 
   if (actionBtn == action.reply) {
-    arrobaUsername = `@${username}, `;
+    texto = `@${username}, `;
   }
 
-  const divTextArea = createTextareaComment(arrobaUsername);
+  const divTextArea = createTextareaComment(texto);
 
   const txtComent = divTextArea.textArea;
   contentCommentary.append(aside, divTextArea, buttonReply);
 
   txtComent.addEventListener("keyup", () => {
-    if (
-      txtComent.value == arrobaUsername ||
-      txtComent.value.trim().length <= 10
-    ) {
+    if (txtComent.value == texto || txtComent.value.trim().length <= 10) {
       validation.disabled = true;
     } else {
       validation.disabled = false;
@@ -77,6 +76,8 @@ export const sectionAddComentary = (
     contentCommentary.append(cardReply);
 
     validation.disabled = true;
+    local.prueba("comentarios", newComment);
+    // local.save("comentarios", newComment);
   });
 
   return contentCommentary;
@@ -112,7 +113,7 @@ export const commentaryReply = (comentario, isReply) => {
   const { image, username } = user;
 
   const replyCommentary = {
-    id: 3,
+    id: generateId(),
     content: content,
 
     createdAt,
