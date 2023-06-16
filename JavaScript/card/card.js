@@ -9,6 +9,7 @@ const createCard = (comentario) => {
   const contentCard = createElement("article", "content-card");
   const contentCardReplies = createElement("div");
   contentCard.setAttribute("id", id);
+  contentCard.id = id
 
   const contentHeader = contentInfoUser(createdAt, user);
   const btnLikes = createVotes(generateId(id), score);

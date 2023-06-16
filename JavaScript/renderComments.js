@@ -3,6 +3,7 @@ import renderComentary, { commentaryReply } from "./card/commentary.js";
 import { modalHtml } from "./modal.js";
 import { createElement } from "./utilities-ui.js";
 import local from "./module/localStorage.js";
+import { elimina } from "./main.js";
 export const renderComments = (comentario) => {
   const containerCard = createElement("section", "container-card");
   const containerCardReplies = createElement("section", "container-replies");
@@ -30,19 +31,19 @@ export const renderComments = (comentario) => {
   // containerCard.contentBtn = card;
   card.replyButton.addEventListener("click", () => {
     commentary.classList.toggle("hidden");
-    
   });
 
   card.delete.addEventListener("click", () => {
     console.log("EVENTO DEL DELETE");
     // modalDelete();
+
     modalHtml.classList.toggle("hidden");
+    modalHtml.setAttribute("idEliminar", card.id);
   });
 
   card.edit.addEventListener("click", () => {
     console.log("EVENTO DEL EDIT");
   });
-
 
   return containerCard;
 };

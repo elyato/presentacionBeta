@@ -12,15 +12,15 @@ export const modalDelete = () => {
     "txtModal"
   );
   const contentBtn = createElement("div", "conten-btn");
-  const btnCancel = createBtn("NO,   CANCEL");
-  btnCancel.classList.add("btn-no-delete");
-contentModal.btnNoCancel = btnCancel
-  const btnEliminarReplica = createBtn("YES, DELETE");
-  btnEliminarReplica.classList.add("btn-yes-delete")
-  contentModal.cancel = btnEliminarReplica;
+  const doNotDelete = createBtn("NO,   CANCEL");
+  doNotDelete.classList.add("btn-no-delete");
+contentModal.btnNoCancel = doNotDelete
+  const btnEliminate = createBtn("YES, DELETE");
+  btnEliminate.classList.add("btn-yes-delete")
+  contentModal.cancel = btnEliminate;
 
   contentModal.append(title, textModal, contentBtn);
-  contentBtn.append(btnCancel, btnEliminarReplica);
+  contentBtn.append(doNotDelete, btnEliminate);
   modalHtml.append(contentModal);
   return contentModal;
 };
