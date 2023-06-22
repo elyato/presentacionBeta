@@ -1,5 +1,3 @@
-import { elimina } from "../main.js";
-
 const saveLocalStorage = (key, value) => {
   localStorage.setItem(key, JSON.stringify(value));
 };
@@ -9,16 +7,19 @@ const getLocalStorage = (key) => {
 };
 function removeLocalstorage(key, id) {
   const element = getLocalStorage(key) ? getLocalStorage(key) : [];
-  // element.filter((x) => x.id == id);
+  element.comments.find((x) => x.id == 1).replies.splice(0, 1);
+  const newElement = element.comments.filter((x) => x.id != id);
 
-  element.indexOf(id);
-  element.splice(elimina, 1);
-  console.log(element, "sobre X");
+  saveLocalStorage("comentarios", element);
 }
-const addItem = (key, value) => {
+const addItem = (key, value, idPrincipal) => {
   const element = getLocalStorage(key) != null ? getLocalStorage(key) : [];
-  element.push(value);
 
+  if (idPrincipal != 0) {
+    element.comments.find((x) => x.id == idPrincipal).replies.push(value);
+  } else {
+    element.comments.push(value);
+  }
   saveLocalStorage(key, element);
   return element;
 };

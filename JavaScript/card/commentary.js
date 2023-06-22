@@ -1,4 +1,4 @@
-import { currentUser } from "../comments.js";
+// import { currentUser } from "../comments.js";
 import { renderComments } from "../renderComments.js";
 import {
   createElement,
@@ -9,18 +9,22 @@ import {
 import createTextareaComment from "./contentCommentary.js";
 import action from "../data/acciones.js";
 import local from "../module/localStorage.js";
+import { commentLocal } from "../infoLocalStorage.js";
 
 export const sectionAddComentary = (
   image,
   username,
-  actionBtn = action.reply
+  actionBtn = action.reply,
+  id
 ) => {
-  const imageCurrentUser = currentUser.image.png;
-  const nameUserReply = currentUser.username;
+  const imageCurrentUser = commentLocal.currentUser.image.png;
+  const nameUserReply = commentLocal.currentUser.username;
 
   const contentCommentary = createElement("div", "content-card");
-  contentCommentary.classList.add("hidden");
   const photoUser = createAvatar(image);
+  const inputHidden = createElement("input");
+  inputHidden.setAttribute("type", "hidden");
+  inputHidden.value = id;
 
   const aside = createElement("aside", "avatar-commentary");
   aside.append(photoUser);
@@ -70,40 +74,47 @@ export const sectionAddComentary = (
       },
       replies: [],
     };
-    const cardReply = renderComentaryReply(newComment);
+
+    const validationButtonReplyOSend = actionBtn == action.send ? false : true;
+
+    const cardReply = renderComentaryReply(
+      newComment,
+      validationButtonReplyOSend
+    );
     contentCommentary.innerHTML = "";
     contentCommentary.classList.remove("content-card");
-    contentCommentary.append(cardReply);
+
+    contentCommentary.append(cardReply, inputHidden);
 
     validation.disabled = true;
-    local.add("comentarios", newComment);
+    local.add("comentarios", newComment, inputHidden.value);
   });
 
   return contentCommentary;
 };
 
-const renderComentary = (comentario, isReply = false) => {
+const renderComentary = (comentario) => {
   const { user } = comentario;
   let image, username;
-  if (isReply) {
-    username = comentario.username;
-  }
+  // if (isReply) {
+  //   username = user.username;
+  // } else {
+  //   username = comentario;
+  // }
 
   if (user) {
-    image = comentario.user.image.png;
-    username = comentario.user.username;
+    image = user.image.png;
+    username =  user.username;
   }
-  // const { image, username } = comentario.user;
-  let contentCommentary = sectionAddComentary(currentUser.image.png, username);
-
-  //  if (comentario.replies.length > 0) {
-  //    comentario.replies.forEach((e) => commentaryReply(e, true));
-  //  }
+  let contentCommentary = sectionAddComentary(
+    commentLocal.currentUser.image.png,
+    username
+  );
 
   return contentCommentary;
 };
-const renderComentaryReply = (comentario) => {
-  const cardReply = commentaryReply(comentario);
+const renderComentaryReply = (comentario, isReply) => {
+  const cardReply = commentaryReply(comentario, isReply);
   return cardReply;
 };
 
@@ -130,8 +141,7 @@ export const commentaryReply = (comentario, isReply) => {
   commentaryReply.id = replyCommentary;
 
   const renderComment = renderComments(replyCommentary, isReply);
-
-  renderComment.classList.add("reply-container");
+  if (isReply) renderComment.classList.add("reply-container");
 
   return renderComment;
 };

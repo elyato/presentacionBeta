@@ -1,17 +1,20 @@
-import sectionAddComentary from "./card/commentary.js";
-import { comentarios, currentUser } from "./comments.js";
+import { sectionAddComentary } from "./card/commentary.js";
+import { comentarios } from "./comments.js";
 import action from "./data/acciones.js";
 import { modalDelete, modalHtml } from "./modal.js";
 import { renderComments } from "./renderComments.js";
 import local from "./module/localStorage.js";
+import localStorage from "./module/localStorage.js";
+import { commentLocal } from "./infoLocalStorage.js";
 
-comentarios.forEach(renderComments);
+commentLocal.comments.map((x) => renderComments(x));
 
 const contentHome = document.getElementById("content-home");
 const youProfile = sectionAddComentary(
-  currentUser.image.png,
-  currentUser.username,
-  action.send
+  commentLocal.currentUser.image.png,
+  "commentLocal.currentUser.username",
+  action.send,
+  0
 );
 contentHome.append(youProfile);
 
@@ -23,6 +26,9 @@ modal.cancel.addEventListener("click", () => {
   modalHtml.classList.toggle("hidden");
   const idElimina = modalHtml.getAttribute("idEliminar");
   elimina(idElimina);
+  const eliminarCard = document
+    .getElementById(idElimina)
+    .parentNode.parentNode.remove();
 });
 
 modal.btnNoCancel.addEventListener("click", () => {

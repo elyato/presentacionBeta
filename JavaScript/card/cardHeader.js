@@ -1,7 +1,7 @@
 import { createElement, createText } from "../utilities-ui.js";
 import icon from "../data/svg.js";
-import { currentUser } from "../comments.js";
-
+import { commentLocal } from "../infoLocalStorage.js";
+// import { currentUser } from "../comments.js";
 export const contentInfoUser = (createdAt, user) => {
   const header = createElement("article", "content-title-card");
   const avatar = createUserAvatar(user);
@@ -47,7 +47,7 @@ export const buttonAction = (username) => {
   const iconEdit = createButtonIcon(icon.edit, "EDIT");
 
   contentIcons.append(iconDelete, iconEdit);
-  if (currentUser.username == username) {
+  if (commentLocal.currentUser.username == username) {
     btnRenderizar = contentIcons;
   }
   btnRenderizar.reply = iconReply;
