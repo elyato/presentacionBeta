@@ -1,6 +1,6 @@
 import { createElement, createText } from "../utilities-ui.js";
 import icon from "../data/svg.js";
-import { commentLocal } from "../infoLocalStorage.js";
+import { commentLocal } from "../module/infoLocalStorage.js";
 // import { currentUser } from "../comments.js";
 export const contentInfoUser = (createdAt, user) => {
   const header = createElement("article", "content-title-card");

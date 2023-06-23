@@ -1,7 +1,7 @@
 import { contentInfoUser, createVotes, buttonAction } from "./index.js";
 import { createElement, generateId } from "../utilities-ui.js";
 import contentBodyCard from "./cardBody.js";
-import { commentLocal } from "../infoLocalStorage.js";
+import localStorage from "../module/localStorage.js";
 
 const createCard = (comentario) => {
   const { id, score, user, createdAt, content: descComment } = comentario;
@@ -14,7 +14,7 @@ const createCard = (comentario) => {
 
   const contentHeader = contentInfoUser(createdAt, user);
   const btnLikes = createVotes(generateId(id), score);
-
+  localStorage.get()
   const btnActions = buttonAction(username);
 
   const contentComment = createElement("section", "content-comment");

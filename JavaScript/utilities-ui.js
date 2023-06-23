@@ -1,10 +1,13 @@
 import { commentaryReply } from "./card/commentary.js";
 import { comentarios } from "./comments.js";
 
-export const createElement = (tagName, className) => {
+export const createElement = (tagName, className, id) => {
   const element = document.createElement(tagName);
   if (className) {
     element.classList.add(className);
+  }
+  if (id) {
+    element.setAttribute("id", id);
   }
   return element;
 };
@@ -31,7 +34,6 @@ export const createBtn = (text) => {
 };
 
 export const generateId = (id) => {
-  
   const idAleatorio = Math.random().toString(8).substring(2, 6);
 
   return idAleatorio;
