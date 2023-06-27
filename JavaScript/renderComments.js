@@ -6,10 +6,8 @@ export const renderComments = (comentario) => {
   const card = createCard(comentario);
   const containerCard = uiRenderComments(card);
 
-  // const sectionCommentary = addSectionComment(comentario);
-
   if (comentario.replies.length > 0) {
-    comentario.replies.forEach((comentarioReplica) => {
+    $.each(comentario.replies, (index, comentarioReplica) => {
       const cardReply = renderCommentsReply(
         comentarioReplica,
         containerCard.replies
@@ -18,25 +16,12 @@ export const renderComments = (comentario) => {
     });
   }
   validationReplies(card, comentario, containerCard);
-
-  // if (comentario.replica) {
-  //   containerCardReplies.append(commentReply);
-  //   containerCard.append(containerCardReplies);
-  // }
-
-  // containerCard.commentary = sectionCommentary;
-  // // containerCard.contentBtn = card;
-  // renderComments.containerCardReplies = containerCardReplies;
   return containerCard;
 };
 
-export const renderCommentsReply = (comentario,containerCard) => {
+export const renderCommentsReply = (comentario, containerCard) => {
   const card = createCard(comentario);
 
-  validationReplies(
-    card,
-    comentario,
-    containerCard
-  );
+  validationReplies(card, comentario, containerCard);
   return card;
 };

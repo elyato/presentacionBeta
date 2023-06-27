@@ -1,7 +1,6 @@
 import { contentInfoUser, createVotes, buttonAction } from "./index.js";
 import { createElement, generateId } from "../utilities-ui.js";
 import contentBodyCard from "./cardBody.js";
-import localStorage from "../module/localStorage.js";
 
 const createCard = (comentario) => {
   const { id, score, user, createdAt, content: descComment } = comentario;
@@ -9,21 +8,20 @@ const createCard = (comentario) => {
 
   const contentCard = createElement("article", "content-card");
   const contentCardReplies = createElement("div");
-  contentCard.setAttribute("id", id);
+  $(contentCard).attr("id", id);
   contentCard.id = id;
 
   const contentHeader = contentInfoUser(createdAt, user);
-  const btnLikes = createVotes(generateId(id), score);
-  localStorage.get()
+  const btnLikes = createVotes(generateId(id), score, comentario);
   const btnActions = buttonAction(username);
 
   const contentComment = createElement("section", "content-comment");
 
   const textComment = contentBodyCard(descComment);
 
-  contentHeader.append(btnActions);
-  contentComment.append(contentHeader, textComment);
-  contentCard.append(btnLikes, contentComment, contentCardReplies);
+  $(contentHeader).append(btnActions);
+  $(contentComment).append(contentHeader, textComment);
+  $(contentCard).append(btnLikes, contentComment, contentCardReplies);
   contentCard.replyButton = btnActions.reply;
   contentCard.delete = btnActions.delete;
   contentCard.edit = btnActions.edit;

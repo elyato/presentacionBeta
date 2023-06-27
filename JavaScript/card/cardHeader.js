@@ -8,8 +8,8 @@ export const contentInfoUser = (createdAt, user) => {
 
   const dateRegister = createText(createdAt);
 
-  avatar.append(dateRegister);
-  header.append(avatar);
+  $(avatar).append(dateRegister);
+  $(header).append(avatar);
   return header;
 };
 
@@ -18,11 +18,11 @@ export const createUserAvatar = (user) => {
 
   const photoUser = createElement("img");
   photoUser.src = user.image.png;
-  contentUser.append(photoUser);
+  $(contentUser).append(photoUser);
 
   const nameUser = createElement("h2");
-  nameUser.textContent = user.username;
-  contentUser.append(nameUser);
+  $(nameUser).text(user.username);
+  $(contentUser).append(nameUser);
 
   return contentUser;
 };
@@ -32,7 +32,7 @@ export const createButtonIcon = (svg, text) => {
 
   const iconReply = createElement("button", "icon-button");
   iconReply.innerHTML = svg + text;
-  contentReply.append(iconReply);
+  $(contentReply).append(iconReply);
   contentReply.iconReply = iconReply;
   return contentReply;
 };
@@ -46,7 +46,7 @@ export const buttonAction = (username) => {
   const iconDelete = createButtonIcon(icon.delete, "DELETE");
   const iconEdit = createButtonIcon(icon.edit, "EDIT");
 
-  contentIcons.append(iconDelete, iconEdit);
+  $(contentIcons).append(iconDelete, iconEdit);
   if (commentLocal.currentUser.username == username) {
     btnRenderizar = contentIcons;
   }

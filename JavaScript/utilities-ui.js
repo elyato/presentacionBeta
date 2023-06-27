@@ -1,20 +1,17 @@
-import { commentaryReply } from "./card/commentary.js";
-import { comentarios } from "./comments.js";
-
 export const createElement = (tagName, className, id) => {
   const element = document.createElement(tagName);
   if (className) {
-    element.classList.add(className);
+    $(element).addClass(className);
   }
   if (id) {
-    element.setAttribute("id", id);
+    $(element).attr("id", id);
   }
   return element;
 };
 
 export const createText = (texto, clas) => {
   const text = createElement("p", clas);
-  text.textContent = texto;
+  $(text).text(texto);
   return text;
 };
 
@@ -27,21 +24,14 @@ export const createAvatar = (image) => {
 export const createBtn = (text) => {
   const contentBtn = createElement("article", "btn-commentary");
   const btn = createElement("button");
-  btn.textContent = text;
+  $(btn).text(text);
   contentBtn.btn = btn;
   contentBtn.append(btn);
   return contentBtn;
 };
 
 export const generateId = (id) => {
-  const idAleatorio = Math.random().toString(8).substring(2, 6);
+  const idRandom = Math.random().toString(8).substring(2, 6);
 
-  return idAleatorio;
+  return idRandom;
 };
-
-// const takeoutIndex = () => {
-//   comentarios.length;
-//   console.log(comentarios);
-// };
-
-// takeoutIndex()

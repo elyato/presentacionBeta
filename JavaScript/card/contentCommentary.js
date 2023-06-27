@@ -8,7 +8,7 @@ import { createElement } from "../utilities-ui.js";
   writtenCommentary.placeholder = "agregar comentario";
   contentWrittenCommentary.textArea = writtenCommentary;
 
-  contentWrittenCommentary.append(writtenCommentary);
+  $(contentWrittenCommentary).append(writtenCommentary);
   return contentWrittenCommentary;
 };
 

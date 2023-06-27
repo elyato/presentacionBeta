@@ -1,12 +1,13 @@
 import action from "../data/acciones.js";
 import { commentLocal } from "../module/infoLocalStorage.js";
 import local from "../module/localStorage.js";
+import { renderComments } from "../renderComments.js";
 import { uiRenderComments } from "../ui/ui.js";
 import { generateId } from "../utilities-ui.js";
 import { commentaryReply, sectionAddComentary } from "./commentary.js";
 
 export const createNewCommentary = (
-  valor,
+  content,
   username,
   actionBtn,
   validation,
@@ -16,7 +17,7 @@ export const createNewCommentary = (
   const nameUserReply = commentLocal.currentUser.username;
   const newComment = {
     id: generateId(),
-    content: valor,
+    content: content,
     createdAt: "JUST NOW",
     score: 0,
     replyingTo: username,
@@ -32,13 +33,21 @@ export const createNewCommentary = (
 
   const validationButtonReplyOSend = actionBtn == action.send ? false : true;
 
-  const cardReply = commentaryReply(newComment, validationButtonReplyOSend);
-    
-  const contentCommentary = uiRenderComments.replies; 
-
   const inputHidden = sectionAddComentary.inputHidden;
   inputHidden.value = id;
-  contentCommentary.append(cardReply, inputHidden);
+  let cardReply;
+  if (id == 0) {
+    cardReply = renderComments(newComment);
+
+  } else {
+
+    cardReply = commentaryReply(newComment, validationButtonReplyOSend);
+    const contentCommentary = uiRenderComments.replies;
+    $(contentCommentary).append(cardReply, inputHidden);
+
+  }
+
+
 
   validation.disabled = true;
   local.add("comentarios", newComment, inputHidden.value);

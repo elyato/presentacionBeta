@@ -1,25 +1,27 @@
-import { createElement, generateId } from "../utilities-ui.js";
+import { createElement } from "../utilities-ui.js";
 import icons from "./svg.js";
 import estado from "./estados.js";
+import local from "../module/localStorage.js";
 export const createVotes = (id, score) => {
   const contentLikes = createElement("aside");
 
   const contentButton = createElement("div", "button-likes");
 
   const iconMinus = createElement("button", "icon-plus");
-  iconMinus.innerHTML = icons.minus;
-  iconMinus.onclick = () => {
-    let scoreActual = document.getElementById("labelScore-" + id).textContent;
+  $(iconMinus).html(icons.minus);
+  $(iconMinus).on("click", () => {
+    let scoreActual = $(`#labelScore-${id}`).text();
     scoreActual = parseInt(scoreActual);
     const nuevoEstado = reduce(scoreActual, estado.positivo);
     incrementVotes(nuevoEstado, id);
-  };
-  contentButton.append(iconMinus);
+    //const newcommentScore = comentario.score = nuevoEstado;
+    // console.log(newcommentScore);
+  });
 
   const totalVotes = createElement("h2", "score-likes");
-  totalVotes.setAttribute("id", "labelScore-" + id);
-  totalVotes.textContent = score;
-  contentButton.append(totalVotes);
+  $(totalVotes).attr(`id`, `labelScore-${id}`);
+  $(totalVotes).text(score);
+  contentButton.append(iconMinus, totalVotes);
 
   const reduce = (state, action) => {
     switch (action) {
@@ -36,9 +38,9 @@ export const createVotes = (id, score) => {
   };
 
   const iconPLus = createElement("button", "icon-minus");
-  iconPLus.innerHTML = icons.plus;
+  $(iconPLus).html(icons.plus);
   iconPLus.onclick = () => {
-    let scoreActual = document.getElementById("labelScore-" + id).textContent;
+    let scoreActual = $(`#labelScore-${id}`).text();
     scoreActual = parseInt(scoreActual);
     const nuevoEstado = reduce(scoreActual, estado.negativo);
     incrementVotes(nuevoEstado, id);
@@ -50,7 +52,7 @@ export const createVotes = (id, score) => {
 };
 
 const incrementVotes = (votos, id) => {
-  const totalVotesElement = document.getElementById("labelScore-" + id);
-
-  totalVotesElement.textContent = votos;
+  const valorDelBoton = $(`#labelScore-${id}`).parent().parent().parent()[0].id;
+  local.score("comentarios", valorDelBoton, votos);
+  return $(`#labelScore-${id}`).text(votos);
 };
